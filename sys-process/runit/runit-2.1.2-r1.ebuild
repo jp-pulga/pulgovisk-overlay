@@ -101,11 +101,6 @@ default_config() {
 	einfo "for how to set them up."
 	einfo
 }
-pkg_preinst() {
-	if  has_version '<sys-process/runit-2.1.2'; then
-		pre_212=yes
-	fi
-}
 
 pkg_postinst() {
 	if [[ -z $REPLACING_VERSIONS ]]; then
