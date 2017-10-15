@@ -6,12 +6,6 @@ Most of packages are patched to work with [musl](https://www.musl-libc.org/) lib
 # How to enable the overlay?
 1. Install [layman](https://packages.gentoo.org/packages/app-portage/layman)
 2. Run the follow command as root:
-
-```layman -f -o https://raw.githubusercontent.com/Pulgovisk/pulgovisk-overlay/master/pulgovisk-overlay.xml -a pulgovisk-overlay```
-
-3. In the future, update both the portage tree and the overlay
 ```
-emerge --sync
-layman -S
-emerge -auDN world
+layman -f -o https://raw.githubusercontent.com/Pulgovisk/pulgovisk-overlay/master/pulgovisk-overlay.xml -a pulgovisk-overlay
 ```
