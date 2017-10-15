@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>pulgovisk-overlay</name>
+    <description lang="en">Pulgovisk custom ebuild overlay</description>
+    <homepage>https://github.com/Pulgovisk/pulgovisk-overlay</homepage>
+    <owner type="person">
+      <email>joaopaulo1339@outlook.com</email>
+      <name>João Paulo Pulga</name>
+    </owner>
+    <source type="git">https://github.com/Pulgovisk/pulgovisk-overlay.git</source>
+    <feed>https://github.com/Pulgovisk/pulgovisk-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>
