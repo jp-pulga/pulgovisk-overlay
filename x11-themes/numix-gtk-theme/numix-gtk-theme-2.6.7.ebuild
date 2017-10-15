@@ -24,5 +24,5 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	insinto /usr/share/themes/Numix
-	doins -r *
+	doins -r share/themes/Numix/*
 }
