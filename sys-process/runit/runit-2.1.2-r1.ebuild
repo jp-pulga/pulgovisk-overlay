@@ -47,7 +47,7 @@ src_install() {
 	einstalldocs
 	doman ../man/*.[18]
 
-	dodir /etc/runit
+dodir /etc/runit
 	exeinto /etc/runit
 	doexe "${FILESDIR}"/ctrlaltdel
 	newexe "${FILESDIR}"/1-${PV} 1
@@ -100,6 +100,11 @@ default_config() {
 	einfo "If you need multiple runlevels, please see the documentation"
 	einfo "for how to set them up."
 	einfo
+}
+pkg_preinst() {
+	if  has_version '<sys-process/runit-2.1.2'; then
+		pre_212=yes
+	fi
 }
 
 pkg_postinst() {

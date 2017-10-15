@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /bin/chpst -P /sbin/agetty 38400 TTY linux
