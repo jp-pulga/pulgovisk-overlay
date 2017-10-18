@@ -47,12 +47,12 @@ src_install() {
 	einstalldocs
 	doman ../man/*.[18]
 
-dodir /etc/runit
+	dodir /etc/runit
 	exeinto /etc/runit
 	doexe "${FILESDIR}"/ctrlaltdel
-	newexe "${FILESDIR}"/1 1
-	newexe "${FILESDIR}"/2 2
-	newexe "${FILESDIR}"/3 3
+	doexe "${FILESDIR}"/1
+	doexe "${FILESDIR}"/2
+	doexe "${FILESDIR}"/3
 
 	dodir /etc/sv
 	for tty in tty1 tty2 tty3 tty4 tty5 tty6; do
@@ -73,27 +73,13 @@ dodir /etc/runit
 	newins "${T}"/env.d 20runit
 }
 
-pkg_preinst() {
-	if has_version 'sys-process/runit' &&
-		has_version '<sys-process/runit-2.1.2' &&
-		[ -d "${EROOT}"etc/runit/runsvdir/all ]; then
-		if [ -e "${EROOT}"etc/sv ]; then
-			mv -f "${EROOT}"etc/sv "${EROOT}"etc/sv.bak || die
-			ewarn "${EROOT}etc/sv was moved to ${EROOT}etc/sv.bak"
-		fi
-		mv "${EROOT}"etc/runit/runsvdir/all "${EROOT}"etc/sv|| die
-		ln -sf "${EROOT}"etc/sv "${EROOT}"etc/runit/runsvdir/all || die
-		cp -a "${EROOT}"etc/runit/runsvdir "${T}" || die
-		touch "${T}"/make_var_service || die
-	fi
-}
-
 default_config() {
 	local sv="${EROOT}"etc/sv
 	local service="${EROOT}"etc/service
+
 	mkdir -p "${service}" || die
 	for x in tty1 tty2 tty3 tty4 tty5 tty6; do
-	ln -sf "${sv}"/getty-$x "${service}"/getty-$x || die
+		ln -sf "${sv}"/getty-$x "${service}" || die
 	done
 	einfo "The links to services runit will supervise are installed"
 	einfo "in $service."
@@ -112,6 +98,8 @@ pkg_postinst() {
 	ewarn
 	ewarn "source /etc/profile"
 	ewarn
+	ewarn "This package dont provide the boot-scripts"
+	ewarn "For default boot-scritps, you can install sys-boot/pulgovisk-boot-scripts"
 
 	if [ -L "${EROOT}"var/service ]; then
 		ewarn "Once this version of runit is active, please remove the"
