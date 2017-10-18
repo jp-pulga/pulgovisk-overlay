@@ -15,7 +15,7 @@ SRC_URI="https://archlinux.surlyjake.com/archlinux/community/os/x86_64/${PF}-1-a
 S="${WORKDIR}/usr"
 
 DEPEND="
-	app-arch/gzip
+	app-arch/xz-utils
 	x11-themes/gtk-engines-murrine
 	x11-libs/gtk+
 "
