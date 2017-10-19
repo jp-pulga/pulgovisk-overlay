@@ -14,12 +14,14 @@ KEYWORDS="alpha amd64 arm arm64 hppa ia64 mips ppc ppc64 s390 sh sparc x86"
 SRC_URI="https://archlinux.surlyjake.com/archlinux/community/os/x86_64/${PF}-1-any.pkg.tar.xz"
 S="${WORKDIR}/usr"
 
-DEPEND="
-	app-arch/xz-utils
+RDEPEND="
 	x11-themes/gtk-engines-murrine
 	x11-libs/gtk+
 "
-RDEPEND="${DEPEND}"
+DEPEND="
+	app-arch/xz-utils
+	${RDEPEND}
+"
 
 src_install() {
 	insinto /usr/share/themes/Numix
