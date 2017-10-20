@@ -40,30 +40,12 @@ src_install() {
 	dobin $(<../package/commands)
 	dodir /sbin
 	mv "${ED}"/bin/{runit-init,runit,utmpset} "${ED}"/sbin/ || die "dosbin"
-	dosym ../etc/runit/2 /sbin/runsvdir-start
 
 	DOCS=( ../package/{CHANGES,README,THANKS,TODO} )
 	HTML_DOCS=( ../doc/*.html )
 	einstalldocs
 	doman ../man/*.[18]
-
-	dodir /etc/runit
-	exeinto /etc/runit
-	doexe "${FILESDIR}"/ctrlaltdel
-	doexe "${FILESDIR}"/1
-	doexe "${FILESDIR}"/2
-	doexe "${FILESDIR}"/3
-
-	dodir /etc/sv
-	for tty in tty1 tty2 tty3 tty4 tty5 tty6; do
-		exeinto /etc/sv/getty-$tty/
-		newexe "${FILESDIR}"/finish.getty finish
-		newexe "${FILESDIR}"/run.getty run
-		for script in finish run; do
-			sed -i -e "s:TTY:${tty}:g" "${ED}"/etc/sv/getty-$tty/$script
-		done
-	done
-
+	
 	# make sv command work
 	cat <<-EOF > "${T}"/env.d
 		#/etc/env.d/20runit
@@ -74,13 +56,8 @@ src_install() {
 }
 
 default_config() {
-	local sv="${EROOT}"etc/sv
-	local service="${EROOT}"etc/service
-
-	mkdir -p "${service}" || die
-	for x in tty1 tty2 tty3 tty4 tty5 tty6; do
-		ln -sf "${sv}"/getty-$x "${service}" || die
-	done
+	mkdir -p "${EROOT}"etc/service || die
+	
 	einfo "The links to services runit will supervise are installed"
 	einfo "in $service."
 	einfo "If you need multiple runlevels, please see the documentation"

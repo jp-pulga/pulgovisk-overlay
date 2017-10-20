@@ -1,7 +1,0 @@
-#!/bin/sh
-
-PATH=/bin:/usr/bin"
-
-touch /etc/runit/stopit
-chmod 100 /etc/runit/stopit && echo "System is going down in 15 seconds..."
-/bin/sleep 15
