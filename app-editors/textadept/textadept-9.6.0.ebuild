@@ -25,7 +25,7 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/bin/
+	into /usr/bin/
 	for exe in textadept textadept-curses; do
 		doexe $exe
 	done
