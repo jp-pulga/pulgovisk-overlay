@@ -1,7 +1,6 @@
 # Pulgovisk overlay
 
-This repository contain some ebuilds and patches for Gentoo based systems.
-Most of packages are patched to work with [musl](https://www.musl-libc.org/) libc
+This is a small repository contain some ebuilds for Gentoo based systems.
 
 # How to enable the overlay?
 1. Install [layman](https://packages.gentoo.org/packages/app-portage/layman)
