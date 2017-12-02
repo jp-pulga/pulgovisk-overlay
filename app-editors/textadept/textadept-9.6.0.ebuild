@@ -26,7 +26,7 @@ RDEPEND="
 
 src_compile() {
 	cd src
-	emake deps
+	make deps
 	use luajit  && luajit_suffix="jit"
 	use gtk3 && export GTK3=1
 	use gtk     && emake ${PN}${luajit_suffix}
