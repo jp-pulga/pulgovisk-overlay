@@ -34,6 +34,12 @@ src_unpack() {
 src_prepare() {
 	toolchain_src_prepare
 
+	epatch "${FILESDIR}"/gcc-7.2.0-pr69728.patch
+	if use elibc_musl || [[ ${CATEGORY} = cross-*-musl* ]]; then
+		epatch "${FILESDIR}"/cpu_indicator.patch
+		epatch "${FILESDIR}"/posix_memalign.patch
+	fi
+
 	if use d ; then
 		# Get GDC sources into the tree.
 		cd ../GDC-gdc-7 || die "Changing into GDC directory failed."
